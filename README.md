@@ -21,7 +21,7 @@ Desafie seus reflexos e tente bater seu próprio recorde!
 Siga os passos abaixo para executar o SnackAttack:
 
 - Clone este repositório
-git clone https://github.com/AlineTakakura/snack_attack.git
+git clone https://github.com/AlineTakakura/snackattack.git
 
 - Acesse a pasta do projeto
 cd snackattack
