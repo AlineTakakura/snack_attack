@@ -1,6 +1,14 @@
-#ifndef LANCHES_H
-#define LANCHES_H
+#ifndef LANCHE_H
+#define LANCHE_H
 
+typedef struct {
+    int x,y;
+    char simbolo;
+}Lanche;
+
+void initLanche(Lanche *l);
+void atualizarLanche(Lanche *l, int *score, int jogadorX, int *gameOver);
+void desenharLanche(Lanche *l);
 
 
 #endif
