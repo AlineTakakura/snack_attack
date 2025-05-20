@@ -95,7 +95,7 @@ void jogoLoop() {
             screenClear();
             desenharCenario();
             desenharLanche(&lanche);
-            desenharJogador(&jogador);
+            desenharPersonagem(jogador.x, jogador.y);
 
             screenGotoxy(2, 0);
             printf("Score: %d", score);
