@@ -18,7 +18,7 @@ void mostrarMenu() {
     printf("\n\n");
     printf("========== SNACK ATTACK ==========\n");
     printf("Pressione ENTER para jogar\n");
-    printf("Use W A S D para mover o personagem\n");
+    printf("Use setas do teclado (<- e ->) para mover o personagem\n");
     printf("Pressione Q para sair\n");
 
         while (1) {
