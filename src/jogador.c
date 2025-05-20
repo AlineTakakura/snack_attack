@@ -1,6 +1,8 @@
 #include "jogador.h"
 #include "screen.h"
 #include <stdio.h>
+// manipular o arquivo puxar o png
+
 
 void initJogador(Jogador *j) {
     j->x = 40;

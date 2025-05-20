@@ -1,4 +1,4 @@
-#include "jogo.h"
+#include "jogo.h" 
 #include "jogador.h"
 #include "lanche.h"
 #include "screen.h"
@@ -23,6 +23,18 @@ void desenharCenario() {
     }
     fclose(f);
 }
+void desenharPersonagem(int x, int y) {
+    FILE *f = fopen("assets/personagem/personagem.txt", "r");
+    if (!f) return;
+    char linha[100];
+    int yy = 0;
+    while (fgets(linha, sizeof(linha), f)) {
+        screenGotoxy(x, y + yy++);
+        printf("%s", linha);
+    }
+    fclose(f);
+}
+
 
 void inicializarJogo() {
     screenInit(0);
