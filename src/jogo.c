@@ -12,6 +12,29 @@ Jogador jogador;
 Lanche lanche;
 int score = 0, gameOver = 0;
 
+void mostrarMenu() {
+    screenClear();
+
+    printf("\n\n");
+    printf("========== SNACK ATTACK ==========\n");
+    printf("Pressione ENTER para jogar\n");
+    printf("Use W A S D para mover o personagem\n");
+    printf("Pressione Q para sair\n");
+
+        while (1) {
+        if (keyhit()) {// ver se a tecla foi pressionada.
+            char tecla=readch();
+            if (tecla=='\n'||tecla=='\r') {
+                break;
+            }
+            if (tecla=='q'||tecla=='Q') {
+                exit(0);
+            }
+        }
+    }
+
+}
+
 void desenharCenario() {
     FILE *f = fopen("assets/cenario/cenario.txt", "r");
     if (!f) return;

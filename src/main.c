@@ -3,6 +3,7 @@
 #include "jogo.h"
 
 int main() {
+    mostrarMenu(); 
     inicializarJogo();
     jogoLoop();
     finalizarJogo();
