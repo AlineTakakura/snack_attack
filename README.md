@@ -12,21 +12,11 @@ Desafie seus reflexos e tente bater seu próprio recorde!
 ---
 
 ## 🎮 Como Jogar
-
-1. **Mover o personagem:**
-   - Use as **setas do teclado** para mover o personagem.
-   - **Seta para a esquerda:** move o personagem para a esquerda.
-   - **Seta para a direita:** move o personagem para a direita.
-
-2. **Desviar dos lanches:**
-   - Fique atento para não ser atingido pelos lanches que caem.
-   - Mova-se rapidamente para ficar em um espaço seguro.
-
-3. **Sobreviver o máximo possível:**
-   - Quanto mais tempo evitar os lanches, maior será sua pontuação.
-
-4. **Fim de jogo:**
-   - O jogo termina se um lanche atingir o personagem.
+- Use as setas do teclado (← e →) para mover o personagem para a esquerda ou direita.
+- Evite ser atingido pelos lanches que caem do céu.
+- Cada segundo que você permanecer sem ser atingido, sua pontuação aumenta.
+- O jogo termina quando o jogador é atingido por um lanche.
+- Tente alcançar a maior pontuação possível!
 
 ---
 
