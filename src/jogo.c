@@ -9,8 +9,8 @@
 #include <time.h>
 
 Jogador jogador;
-Lanche lanche;
 int score = 0, gameOver = 0;
+Lanche lanches[MAX_LANCHES];
 
 void mostrarMenu() {
     screenClear();
@@ -21,7 +21,7 @@ void mostrarMenu() {
     printf("Use setas do teclado (<- e ->) para mover o personagem\n");
     printf("Pressione Q para sair\n");
 
-        while (1) {
+    while (1) {
         if (keyhit()) {
             char tecla=readch();
             if (tecla=='\n'||tecla=='\r') {
@@ -32,7 +32,6 @@ void mostrarMenu() {
             }
         }
     }
-
 }
 
 void desenharCenario() {
@@ -53,7 +52,10 @@ void inicializarJogo() {
     timerInit(150);
     srand(time(NULL));
     initJogador(&jogador);
-    initLanche(&lanche);
+
+    for (int i = 0; i < MAX_LANCHES; i++) {
+        initLanche(&lanches[i]);
+    }
 }
 
 void finalizarJogo() {
@@ -77,13 +79,18 @@ void jogoLoop() {
                 moverJogador(&jogador, tecla);
             }
 
-            atualizarLanche(&lanche, &score, jogador.x, &gameOver);
+            for (int i = 0; i < MAX_LANCHES; i++) {
+                atualizarLanche(&lanches[i], &score, jogador.x, jogador.y, &gameOver);
+            }
 
             screenClear();
             desenharCenario();
-            desenharLanche(&lanche);
-            desenharJogador(&jogador);
 
+            for (int i = 0; i < MAX_LANCHES; i++) {
+                desenharLanche(&lanches[i]);
+            }
+
+            desenharJogador(&jogador);
 
             screenGotoxy(2, 0);
             printf("Score: %d", score);

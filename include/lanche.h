@@ -2,13 +2,12 @@
 #define LANCHE_H
 
 typedef struct {
-    int x,y;
-    char simbolo;
-}Lanche;
+    int x, y;
+    const char *simbolo;  
+} Lanche;
 
 void initLanche(Lanche *l);
-void atualizarLanche(Lanche *l, int *score, int jogadorX, int *gameOver);
+void atualizarLanche(Lanche *l, int *score, int jogadorX, int jogadorY, int *gameOver);
 void desenharLanche(Lanche *l);
-
 
 #endif
