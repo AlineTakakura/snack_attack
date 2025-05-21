@@ -8,17 +8,13 @@ void initLanche(Lanche *l) {
     l->y = 1;
     l->simbolo = "🍔";  
 }
-
 void atualizarLanche(Lanche *l, int *score, int jogadorX, int jogadorY, int *gameOver) {
     l->y++;
-    if (l->y == jogadorY) {
-        if (l->x == jogadorX) {
-            *gameOver = 1;
-        } else {
-            (*score)++;
-            initLanche(l);
-        }
+    if (l->y == jogadorY && abs(l->x - jogadorX) <= 1) {
+        *gameOver = 1;
+        return;
     }
+
     if (l->y > jogadorY) {
         (*score)++;
         initLanche(l);
