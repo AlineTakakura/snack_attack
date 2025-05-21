@@ -10,7 +10,8 @@
 
 Jogador jogador;
 int score = 0, gameOver = 0;
-Lanche lanches[MAX_LANCHES];
+Lanche *lanches = NULL;   
+int num_lanches = 5;      
 
 void mostrarMenu() {
     screenClear();
@@ -53,7 +54,13 @@ void inicializarJogo() {
     srand(time(NULL));
     initJogador(&jogador);
 
-    for (int i = 0; i < MAX_LANCHES; i++) {
+    lanches = malloc(sizeof(Lanche) * num_lanches);
+    if (!lanches) {
+        fprintf(stderr, "Erro ao alocar memória para lanches\n");
+        exit(1);
+    }
+
+    for (int i = 0; i < num_lanches; i++) {
         initLanche(&lanches[i]);
     }
 }
@@ -62,6 +69,11 @@ void finalizarJogo() {
     screenDestroy();
     keyboardDestroy();
     timerDestroy();
+
+    if (lanches) {
+        free(lanches);
+        lanches = NULL;
+    }
 
     FILE *f = fopen("data/score.txt", "a");
     if (f) {
@@ -79,14 +91,14 @@ void jogoLoop() {
                 moverJogador(&jogador, tecla);
             }
 
-            for (int i = 0; i < MAX_LANCHES; i++) {
+            for (int i = 0; i < num_lanches; i++) {
                 atualizarLanche(&lanches[i], &score, jogador.x, jogador.y, &gameOver);
             }
 
             screenClear();
             desenharCenario();
 
-            for (int i = 0; i < MAX_LANCHES; i++) {
+            for (int i = 0; i < num_lanches; i++) {
                 desenharLanche(&lanches[i]);
             }
 

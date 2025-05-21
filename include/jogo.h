@@ -1,13 +1,14 @@
 #ifndef JOGO_H
 #define JOGO_H
+
 #include "lanche.h"
-#define MAX_LANCHES 5
+
+extern Lanche *lanches;    
+extern int num_lanches;    
 
 void mostrarMenu();
 void inicializarJogo();
 void jogoLoop();
 void finalizarJogo();
-
-extern Lanche lanches[MAX_LANCHES];
 
 #endif
