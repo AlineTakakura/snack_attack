@@ -10,9 +10,11 @@ void initLanche(Lanche *l) {
 }
 void atualizarLanche(Lanche *l, int *score, int jogadorX, int jogadorY, int *gameOver) {
     l->y++;
-    if (l->y == jogadorY && abs(l->x - jogadorX) <= 1) {
-        *gameOver = 1;
-        return;
+   if (l->y == jogadorY) {
+        if ((l->x == jogadorX)||(l->x == jogadorX - 1)||(l->x == jogadorX + 1)) {
+            *gameOver = 1;
+            return;
+        }
     }
 
     if (l->y > jogadorY) {
