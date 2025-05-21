@@ -4,10 +4,11 @@
 #include <stdlib.h>
 
 void initLanche(Lanche *l) {
-    l->x = rand() % 75 + 3;
+    l->x = rand() % 68 + 1;  
     l->y = 1;
     l->simbolo = '*';
 }
+
 
 void atualizarLanche(Lanche *l, int *score, int jogadorX, int *gameOver) {
     l->y++;

@@ -22,7 +22,7 @@ void mostrarMenu() {
     printf("Pressione Q para sair\n");
 
         while (1) {
-        if (keyhit()) {// ver se a tecla foi pressionada.
+        if (keyhit()) {
             char tecla=readch();
             if (tecla=='\n'||tecla=='\r') {
                 break;
@@ -46,18 +46,6 @@ void desenharCenario() {
     }
     fclose(f);
 }
-void desenharPersonagem(int x, int y) {
-    FILE *f = fopen("assets/personagem/personagem.txt", "r");
-    if (!f) return;
-    char linha[100];
-    int yy = 0;
-    while (fgets(linha, sizeof(linha), f)) {
-        screenGotoxy(x, y + yy++);
-        printf("%s", linha);
-    }
-    fclose(f);
-}
-
 
 void inicializarJogo() {
     screenInit(0);
@@ -73,7 +61,6 @@ void finalizarJogo() {
     keyboardDestroy();
     timerDestroy();
 
-    // salvar score no arquivo
     FILE *f = fopen("data/score.txt", "a");
     if (f) {
         fprintf(f, "Score: %d\n", score);
@@ -95,7 +82,8 @@ void jogoLoop() {
             screenClear();
             desenharCenario();
             desenharLanche(&lanche);
-            desenharPersonagem(jogador.x, jogador.y);
+            desenharJogador(&jogador);
+
 
             screenGotoxy(2, 0);
             printf("Score: %d", score);
