@@ -23,14 +23,19 @@ Desafie seus reflexos e tente bater seu próprio recorde!
 ## ⚙️ Executando o Jogo
 
 Siga os passos abaixo para executar o SnackAttack:
-
-- Clone este repositório
+ ```bash
+- Clone este repositório:
 git clone https://github.com/AlineTakakura/snackattack.git
 
-- Acesse a pasta do projeto
+- Acesse a pasta do projeto:
 cd snackattack
 
+-Compile o jogo usando o Makefile:
+make
 
+-Execute o jogo:
+./snackattack
+```
 ## 👩‍💻 Grupo: SnackAttack
 
 - Aline May Takakura – amt2@cesar.school
