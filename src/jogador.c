@@ -1,14 +1,15 @@
 #include "jogador.h"
 #include "screen.h"
 #include <stdio.h>
-// manipular o arquivo puxar o png
 
 
 void initJogador(Jogador *j) {
-    j->x = 40;
-    j->y = 22;
-    j->sprite = 'A'; 
+    j->x = 35;            
+    j->y = 20;            
+    j->largura = 3;
+    j->altura = 3;
 }
+
 
 void moverJogador(Jogador *j, char tecla) {
     if (tecla == 'a' && j->x > 3) j->x--;

@@ -81,20 +81,6 @@ void finalizarJogo() {
         fclose(f);
     }
 }
-void atualizarLanche(Lanche *l, int *score, int jogadorX, int jogadorY, int *gameOver) {
-    l->y++;
-
-    if (l->y == jogadorY && (l->x == jogadorX || l->x == jogadorX - 1 || l->x == jogadorX + 1)) {
-        *gameOver = 1;
-        return;
-    }
-
-    if (l->y > jogadorY) {
-        (*score)++;
-        initLanche(l);
-    }
-}
-
 
 void jogoLoop() {
     while (!gameOver) {
@@ -106,7 +92,7 @@ void jogoLoop() {
             }
 
             for (int i = 0; i < num_lanches; i++) {
-                atualizarLanche(&lanches[i], &score, jogador.x, jogador.y, &gameOver);
+                atualizarLanche(&lanches[i], &score, jogador.x, jogador.y, jogador.largura, jogador.altura, &gameOver);
             }
 
             screenClear();
