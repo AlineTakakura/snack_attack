@@ -1,9 +1,10 @@
 #ifndef LANCHE_H
 #define LANCHE_H
 
-typedef struct {
+typedef struct Lanche{
     int x, y;
-    const char *simbolo;  
+    const char *simbolo; 
+    struct Lanche *prox; 
 } Lanche;
 
 void initLanche(Lanche *l);

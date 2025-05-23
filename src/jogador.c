@@ -21,9 +21,8 @@ void desenharJogador(Jogador *j) {
     if (!f) return;
 
     char linha[100];
-    int yy = 0;
-    while (fgets(linha, sizeof(linha), f)) {
-        screenGotoxy(j->x, j->y + yy++);
+    for (int yy = 0; fgets(linha, sizeof(linha), f); yy++) {
+        screenGotoxy(j->x, j->y + yy);
         printf("%s", linha);
     }
     fclose(f);

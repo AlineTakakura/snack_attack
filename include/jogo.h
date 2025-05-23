@@ -3,8 +3,7 @@
 
 #include "lanche.h"
 
-extern Lanche *lanches;    
-extern int num_lanches;    
+extern Lanche *lanches;      
 
 void mostrarMenu();
 void inicializarJogo();

@@ -7,20 +7,22 @@ void initLanche(Lanche *l) {
     l->x = rand() % 68 + 1;
     l->y = 1;
     l->simbolo = "🍔";  
+    l->prox=NULL;
 }
 void atualizarLanche(Lanche *l, int *score, int jogadorX, int jogadorY, int jogadorLargura, int jogadorAltura, int *gameOver){
     l->y++;
-    int dentroX = l->x >= jogadorX && l->x < jogadorX + jogadorLargura;
-    int dentroY = l->y >= jogadorY && l->y < jogadorY + jogadorAltura;
+    int colideX = l->x >= jogadorX && l->x < jogadorX + jogadorLargura;
+    int colideY = l->y >= jogadorY && l->y < jogadorY + jogadorAltura;
 
-    if (dentroX && dentroY) {
+    if (colideX && colideY) {
         *gameOver = 1;
         return;
     }
 
     if (l->y > 23) { 
         (*score)++;
-        initLanche(l);
+        l->x = rand() % 68 + 1;
+        l->y = 1;
     }
 }
 

@@ -11,7 +11,12 @@
 Jogador jogador;
 int score = 0, gameOver = 0;
 Lanche *lanches = NULL;   
-int num_lanches = 5;      
+int num_lanches = 5;
+
+#define LINHAS_CENARIO 23
+#define COLUNAS_CENARIO 80
+
+char cenario[LINHAS_CENARIO][COLUNAS_CENARIO];
 
 void mostrarMenu() {
     screenClear();
@@ -24,27 +29,39 @@ void mostrarMenu() {
 
     while (1) {
         if (keyhit()) {
-            char tecla=readch();
-            if (tecla=='\n'||tecla=='\r') {
+            char tecla = readch();
+            if (tecla == '\n' || tecla == '\r') {
                 break;
             }
-            if (tecla=='q'||tecla=='Q') {
+            if (tecla == 'q' || tecla == 'Q') {
                 exit(0);
             }
         }
     }
 }
 
-void desenharCenario() {
+void carregarCenario() {
     FILE *f = fopen("assets/cenario/cenario.txt", "r");
     if (!f) return;
-    char linha[100];
-    int y = 1;
-    while (fgets(linha, sizeof(linha), f) && y <= 23) {
-        screenGotoxy(3, y++);
-        printf("%s", linha);
+
+    for (int y = 0; y < LINHAS_CENARIO; y++) {
+        if (fgets(cenario[y], COLUNAS_CENARIO, f) == NULL) {
+            // Caso falte linha, preenche com espaços
+            for (int x = 0; x < COLUNAS_CENARIO - 1; x++) {
+                cenario[y][x] = ' ';
+            }
+            cenario[y][COLUNAS_CENARIO - 1] = '\0';
+        }
     }
+
     fclose(f);
+}
+
+void desenharCenario() {
+    for (int y = 0; y < LINHAS_CENARIO; y++) {
+        screenGotoxy(3, y + 1);
+        printf("%s", cenario[y]);
+    }
 }
 
 void inicializarJogo() {
@@ -54,15 +71,25 @@ void inicializarJogo() {
     srand(time(NULL));
     initJogador(&jogador);
 
-    lanches = malloc(sizeof(Lanche) * num_lanches);
+    carregarCenario();
+
+    lanches = malloc(sizeof(Lanche));
     if (!lanches) {
-        fprintf(stderr, "Erro ao alocar memória para lanches\n");
+        fprintf(stderr, "Erro ao alocar lanches\n");
         exit(1);
     }
-
-    for (int i = 0; i < num_lanches; i++) {
-        initLanche(&lanches[i]);
+    initLanche(lanches);
+    Lanche *atual = lanches;
+    for (int i = 1; i < num_lanches; i++) {
+        atual->prox = malloc(sizeof(Lanche));
+        if (!atual->prox) {
+            fprintf(stderr, "Erro ao alocar lanches\n");
+            exit(1);
+        }
+        atual = atual->prox;
+        initLanche(atual);
     }
+    atual->prox = NULL;
 }
 
 void finalizarJogo() {
@@ -70,16 +97,34 @@ void finalizarJogo() {
     keyboardDestroy();
     timerDestroy();
 
-    if (lanches) {
-        free(lanches);
-        lanches = NULL;
+    Lanche *atual = lanches;
+    while (atual) {
+        Lanche *prox = atual->prox;
+        free(atual);
+        atual = prox;
     }
+    lanches = NULL;
 
     FILE *f = fopen("data/score.txt", "a");
     if (f) {
         fprintf(f, "Score: %d\n", score);
         fclose(f);
     }
+}
+
+void mostrarTopScores() {
+    FILE *f = fopen("data/score.txt", "r");
+    if (!f) {
+        printf("Nenhum score salvo ainda.\n");
+        return;
+    }
+    printf("\n=== Top Scores ===\n");
+    char linha[100];
+    while (fgets(linha, sizeof(linha), f)) {
+        printf("%s", linha);
+    }
+    printf("==================\n\n");
+    fclose(f);
 }
 
 void jogoLoop() {
@@ -91,28 +136,27 @@ void jogoLoop() {
                 moverJogador(&jogador, tecla);
             }
 
-            for (int i = 0; i < num_lanches; i++) {
-                atualizarLanche(&lanches[i], &score, jogador.x, jogador.y, jogador.largura, jogador.altura, &gameOver);
+            for (Lanche *l = lanches; l != NULL; l = l->prox) {
+                atualizarLanche(l, &score, jogador.x, jogador.y, jogador.largura, jogador.altura, &gameOver);
             }
 
             screenClear();
             desenharCenario();
 
-            for (int i = 0; i < num_lanches; i++) {
-                desenharLanche(&lanches[i]);
+            for (Lanche *l = lanches; l != NULL; l = l->prox) {
+                desenharLanche(l);
             }
 
             desenharJogador(&jogador);
-
             screenGotoxy(2, 0);
             printf("Score: %d", score);
-
             screenUpdate();
         }
     }
 
     screenClear();
     screenGotoxy(30, 12);
-    printf("Game Over! Pontuação final: %d", score);
+    printf("Game Over! Pontuação final: %d\n", score);
+    mostrarTopScores();
     screenUpdate();
 }
