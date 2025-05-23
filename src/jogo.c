@@ -97,19 +97,30 @@ void finalizarJogo(){
     }
 }
 
-void mostrarTopScores(){
-    FILE *f=fopen("data/score.txt","r");
+void telafinal(){
+    screenClear();
+    screenGotoxy(1,1);
+    printf("Game Over! Pontuação final: %d\n\n", score);
+    FILE *f = fopen("data/score.txt","r");
     if(!f){
+        screenGotoxy(1,3);
         printf("Nenhum score salvo ainda.\n");
+        screenUpdate();
         return;
     }
-    printf("\n=== Top Scores ===\n");
-    char linha[100];
-    while(fgets(linha,sizeof(linha),f)){
-        printf("%s",linha);
+    int linha = 3;
+    screenGotoxy(1, linha++);
+    printf("=== Top Scores ===\n");
+
+    char linhaTexto[100];
+    while(fgets(linhaTexto, sizeof(linhaTexto), f)){
+        screenGotoxy(1, linha++);
+        printf("%s", linhaTexto);
     }
-    printf("==================\n\n");
+    screenGotoxy(1, linha++);
+    printf("==================\n");
     fclose(f);
+    screenUpdate();
 }
 
 void jogoLoop(){
@@ -134,9 +145,6 @@ void jogoLoop(){
             screenUpdate();
         }
     }
-    screenClear();
-    screenGotoxy(30,12);
-    printf("Game Over! Pontuação final: %d\n",score);
-    mostrarTopScores();
-    screenUpdate();
+    telafinal();
 }
+
