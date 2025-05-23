@@ -1,17 +1,3 @@
 Score: 10
 Score: 20
 Score: 25
-Score: 5
-Score: 5
-Score: 5
-Score: 10
-Score: 0
-Score: 50
-Score: 0
-Score: 5
-Score: 20
-Score: 15
-Score: 50
-Score: 35
-Score: 25
-Score: 5
