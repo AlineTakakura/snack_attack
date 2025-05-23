@@ -2,10 +2,10 @@
 #define JOGADOR_H
 
 typedef struct {
-    int x, y;           
+    int x,y;           
     int largura;        
     int altura;         
-} Jogador;
+}Jogador;
 
 void initJogador(Jogador *j);
 void moverJogador(Jogador *j, char tecla);
