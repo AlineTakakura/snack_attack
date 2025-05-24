@@ -36,6 +36,19 @@ make
 -Execute o jogo:
 ./snackattack
 ```
+---
+
+## 📹 Demonstração em Vídeo
+
+Quer ver o **SnackAttack** em ação? Clique na imagem abaixo para assistir à demonstração do jogo:
+
+[![Assista no YouTube](https://img.youtube.com/vi/I3elqEtv8rs/hqdefault.jpg)](https://www.youtube.com/watch?v=I3elqEtv8rs)
+
+> 🔗 **Link direto:** [https://www.youtube.com/watch?v=I3elqEtv8rs](https://www.youtube.com/watch?v=I3elqEtv8rs)
+
+
+
+
 ## 👩‍💻 Grupo: SnackAttack
 
 - Aline May Takakura – amt2@cesar.school
