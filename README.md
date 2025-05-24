@@ -12,7 +12,7 @@ Desafie seus reflexos e tente bater seu próprio recorde!
 ---
 
 ## 🎮 Como Jogar
-- Use as setas do teclado (← e →) para mover o personagem para a esquerda ou direita.
+- Use setas do teclado ('A' e 'D')para mover o personagem para a esquerda ou direita.
 - Evite ser atingido pelos lanches que caem do céu.
 - Cada segundo que você permanecer sem ser atingido, sua pontuação aumenta.
 - O jogo termina quando o jogador é atingido por um lanche.
